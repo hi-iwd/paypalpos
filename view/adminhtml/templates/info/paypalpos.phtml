@@ -1,0 +1,19 @@
+<?php
+/**
+ * @var $block \IWD\PaypalPos\Block\Info\PaypalPos
+ */
+?>
+<div class="order-payment-method-name"><?= $block->escapeHtml($block->getMethod()->getTitle()) ?></div>
+<?php
+$additionalData = $block->getMethod()->getInfoInstance()->getAdditionalInformation();
+?>
+<table class="data-table admin__table-secondary">
+    <?php if ($additionalData):?>
+        <?php foreach ($additionalData as $key => $value):?>
+            <tr>
+                <th><?=$block->escapeHtml($key) ?>:</th>
+                <td><?=$block->escapeHtml($value) ?></td>
+            </tr>
+        <?php endforeach;?>
+    <?php endif; ?>
+</table>

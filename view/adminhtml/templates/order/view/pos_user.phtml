@@ -1,0 +1,12 @@
+<?php
+$viewModel = $block->getData('view_model');
+$username = $viewModel->getUsername();
+if ($username):?>
+<br/><br/><br/>
+<table class="data-table admin__table-secondary order-account-information-table">
+    <tr>
+        <th>Creator</th>
+        <td><?=$block->escapeHtml($username);?></td>
+    </tr>
+</table>
+<?php endif; ?>

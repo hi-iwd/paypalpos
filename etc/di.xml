@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+  <preference for="IWD\PaypalPos\Api\CartManagementInterface" type="IWD\PaypalPos\Model\Quote\QuoteManagement"/>
+  <preference for="IWD\PaypalPos\Api\Data\ProductLoggerInterface" type="IWD\PaypalPos\Model\Data\ProductLogger"/>
+  <preference for="IWD\PaypalPos\Api\ProductLoggerRepositoryInterface" type="IWD\PaypalPos\Model\ResourceModel\ProductLoggerRepository"/>
+  <preference for="IWD\PaypalPos\Api\Data\ProductLoggerSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+  <preference for="IWD\PaypalPos\Api\Data\CustomerLoggerInterface" type="IWD\PaypalPos\Model\Data\CustomerLogger"/>
+  <preference for="IWD\PaypalPos\Api\CustomerLoggerRepositoryInterface" type="IWD\PaypalPos\Model\ResourceModel\CustomerLoggerRepository"/>
+  <preference for="IWD\PaypalPos\Api\Data\CustomerLoggerSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+  <preference for="IWD\PaypalPos\Api\Data\CategoryLoggerInterface" type="IWD\PaypalPos\Model\Data\CategoryLogger"/>
+  <preference for="IWD\PaypalPos\Api\CategoryLoggerRepositoryInterface" type="IWD\PaypalPos\Model\ResourceModel\CategoryLoggerRepository"/>
+  <preference for="IWD\PaypalPos\Api\Data\CategoryLoggerSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+  <preference for="IWD\PaypalPos\Api\CartPriceRuleManagementInterface" type="IWD\PaypalPos\Model\Service\CartPriceRuleManagementService"/>
+  <preference for="IWD\PaypalPos\Api\GuestCartPriceRuleManagementInterface" type="IWD\PaypalPos\Model\Service\GuestCartPriceRuleManagementService"/>
+  <preference for="IWD\PaypalPos\Api\DefaultShippingInformationManagementInterface" type="IWD\PaypalPos\Model\DefaultShippingInformationManagement"/>
+  <preference for="IWD\PaypalPos\Api\Data\AdminUserInterface" type="IWD\PaypalPos\Model\Data\AdminUser"/>
+  <preference for="IWD\PaypalPos\Api\AdminUserRepositoryInterface" type="IWD\PaypalPos\Model\ResourceModel\AdminUserRepository"/>
+  <preference for="IWD\PaypalPos\Api\Data\AdminUserSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+  <preference for="IWD\PaypalPos\Api\Data\UserLoggerInterface" type="IWD\PaypalPos\Model\Data\UserLogger"/>
+  <preference for="IWD\PaypalPos\Api\UserLoggerRepositoryInterface" type="IWD\PaypalPos\Model\ResourceModel\UserLoggerRepository"/>
+  <preference for="IWD\PaypalPos\Api\Data\UserLoggerSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+  <preference for="IWD\PaypalPos\Api\ProductRepositoryInterface" type="IWD\PaypalPos\Model\ProductRepository"/>
+  <preference for="IWD\PaypalPos\Api\Data\CouponLoggerInterface" type="IWD\PaypalPos\Model\Data\CouponLogger"/>
+  <preference for="IWD\PaypalPos\Api\CouponLoggerRepositoryInterface" type="IWD\PaypalPos\Model\ResourceModel\CouponLoggerRepository"/>
+  <preference for="IWD\PaypalPos\Api\Data\CouponLoggerSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+  <preference for="IWD\PaypalPos\Api\OrderPlacementInterface" type="IWD\PaypalPos\Model\Service\OrderPlacementService"/>
+  <preference for="IWD\PaypalPos\Api\Data\BundleOrderItemOptionInterface" type="IWD\PaypalPos\Model\Order\BundleOrderItemOption"/>
+  <preference for="IWD\PaypalPos\Api\Data\BundleOrderItemOptionValueInterface" type="IWD\PaypalPos\Model\Order\BundleOrderItemOptionValue"/>
+  <preference for="IWD\PaypalPos\Api\GuestDefaultShippingInformationManagementInterface" type="IWD\PaypalPos\Model\GuestDefaultShippingInformationManagement"/>
+  <preference for="IWD\PaypalPos\Api\GuestCartManagementInterface" type="IWD\PaypalPos\Model\Quote\GuestQuoteManagement"/>
+  <preference for="IWD\PaypalPos\Api\BackupManagementInterface" type="IWD\PaypalPos\Model\Backup\Date"/>
+  <type name="Magento\User\Model\ResourceModel\User">
+    <plugin name="paypal_pos_admin_delete" type="IWD\PaypalPos\Plugin\User\ResourceModel\User" sortOrder="1"/>
+  </type>
+  <type name="Magento\Catalog\Model\Product\Option\Type\Select">
+    <plugin name="paypalpos_product_option_select" type="IWD\PaypalPos\Plugin\Product\Option\SelectPlugin"/>
+  </type>
+  <preference for="IWD\PaypalPos\Api\Data\SalesCouponLoggerInterface" type="IWD\PaypalPos\Model\Data\SalesCouponLogger"/>
+  <preference for="IWD\PaypalPos\Api\SalesCouponLoggerRepositoryInterface" type="IWD\PaypalPos\Model\ResourceModel\SalesCouponLoggerRepository"/>
+  <preference for="IWD\PaypalPos\Api\Data\SalesCouponLoggerSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+  <preference for="IWD\PaypalPos\Api\Data\UserAttributeInterface" type="IWD\PaypalPos\Model\Data\UserAttribute"/>
+  <preference for="IWD\PaypalPos\Api\UserAttributeRepositoryInterface" type="IWD\PaypalPos\Model\ResourceModel\UserAttributeRepository"/>
+  <preference for="IWD\PaypalPos\Api\Data\UserAttributeSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+  <type name="Magento\Sales\Api\OrderRepositoryInterface">
+    <plugin name="save_pos_user_id" type="IWD\PaypalPos\Plugin\Sales\OrderRepositoryPlugin"/>
+  </type>
+  <type name="Magento\OfflinePayments\Model\Checkmo">
+    <plugin name="save_pos_user_additional_data" type="IWD\PaypalPos\Plugin\OfflinePayments\CheckmoPlugin"/>
+  </type>
+    <type name="Magento\Paypal\Model\AbstractConfig">
+        <plugin name="iwd_all_paypal_config" type="IWD\PaypalPos\Plugin\Payments\Paypal\Config"/>
+    </type>
+</config>

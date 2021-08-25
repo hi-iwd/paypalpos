@@ -1,0 +1,14 @@
+<?php
+/**
+ * @var $block \IWD\PaypalPos\Block\Info\VenmoQR
+ */
+?>
+<?php
+$additionalData = $block->getMethod()->getInfoInstance()->getAdditionalInformation();
+?>
+<?php if ($additionalData):?>
+    <?php foreach ($additionalData as $key => $value):?>
+        <?=$block->escapeHtml($key) ?>:<?=$block->escapeHtml($value) ?>
+        {{pdf_row_separator}}
+    <?php endforeach;?>
+<?php endif; ?>

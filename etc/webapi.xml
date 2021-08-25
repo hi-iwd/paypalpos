@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/customers/:customerId/new/carts/" method="POST">
+        <service class="IWD\PaypalPos\Api\CartManagementInterface" method="createNewCartForCustomer"/>
+        <resources>
+            <resource ref="Magento_Cart::manage" />
+        </resources>
+    </route>
+    <route method="GET" url="/V1/product/logger/search">
+        <service class="IWD\PaypalPos\Api\ProductLoggerRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Magento_Catalog::products"/>
+        </resources>
+    </route>
+    <route method="GET" url="/V1/customer/logger/search">
+        <service class="IWD\PaypalPos\Api\CustomerLoggerRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Magento_Catalog::products" />
+        </resources>
+    </route>
+    <route method="GET" url="/V1/category/logger/search">
+        <service class="IWD\PaypalPos\Api\CategoryLoggerRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Magento_Catalog::categories" />
+        </resources>
+    </route>
+    <route method="PUT" url="/V1/carts/:cartId/coupon/:amountDiscount/percent">
+        <service class="IWD\PaypalPos\Api\CartPriceRuleManagementInterface" method="createPercent"/>
+        <resources>
+            <resource ref="Magento_Cart::manage" />
+        </resources>
+    </route>
+    <route method="PUT" url="/V1/carts/:cartId/coupon/:amountDiscount/fixed">
+        <service class="IWD\PaypalPos\Api\CartPriceRuleManagementInterface" method="createFixed"/>
+        <resources>
+            <resource ref="Magento_Cart::manage" />
+        </resources>
+    </route>
+    <route method="PUT" url="/V1/guest-carts/:cartId/coupon/:amountDiscount/percent">
+        <service class="IWD\PaypalPos\Api\GuestCartPriceRuleManagementInterface" method="createPercent"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route method="PUT" url="/V1/guest-carts/:cartId/coupon/:amountDiscount/fixed">
+        <service class="IWD\PaypalPos\Api\GuestCartPriceRuleManagementInterface" method="createFixed"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V1/carts/:cartId/default/shipping-information" method="POST">
+        <service class="IWD\PaypalPos\Api\DefaultShippingInformationManagementInterface" method="saveDefaultAddressInformation"/>
+        <resources>
+            <resource ref="Magento_Cart::manage" />
+        </resources>
+    </route>
+    <route url="/V1/guest-carts/:cartId/default/shipping-information" method="POST">
+        <service class="IWD\PaypalPos\Api\GuestDefaultShippingInformationManagementInterface" method="saveDefaultAddressInformation"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V1/carts/:cartId/reserve/" method="PUT">
+        <service class="IWD\PaypalPos\Api\CartManagementInterface" method="reserveOrderId"/>
+        <resources>
+            <resource ref="Magento_Cart::manage" />
+        </resources>
+    </route>
+    <route url="/V1/guest-carts/:cartId/reserve/" method="PUT">
+        <service class="IWD\PaypalPos\Api\GuestCartManagementInterface" method="reserveOrderId"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V1/addresses/search" method="GET">
+        <service class="Magento\Customer\Api\AddressRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Magento_Customer::customer"/>
+        </resources>
+    </route>
+    <route url="/V1/orderstatushistory/search" method="GET">
+        <service class="Magento\Sales\Api\OrderStatusHistoryRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Magento_Sales::sales"/>
+        </resources>
+    </route>
+    <route url="/V1/user/search" method="GET">
+        <service class="IWD\PaypalPos\Api\AdminUserRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Magento_Sales::sales"/>
+        </resources>
+    </route>
+    <route method="GET" url="/V1/user/logger/search">
+        <service class="IWD\PaypalPos\Api\UserLoggerRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Magento_Sales::sales"/>
+        </resources>
+    </route>
+    <route url="/V1/backup" method="PUT">
+        <service class="IWD\PaypalPos\Model\BackupFlag" method="addFlag"/>
+        <resources>
+            <resource ref="Magento_Sales::sales"/>
+        </resources>
+    </route>
+    <route url="/V1/products/salable/:sku" method="GET">
+        <service class="IWD\PaypalPos\Api\ProductRepositoryInterface" method="getBySkuWithSalableQty"/>
+        <resources>
+            <resource ref="Magento_Catalog::products" />
+        </resources>
+    </route>
+    <route url="/V1/orders/new/" method="PUT">
+        <service class="IWD\PaypalPos\Api\OrderPlacementInterface" method="save"/>
+        <resources>
+            <resource ref="Magento_Sales::create" />
+        </resources>
+    </route>
+    <route url="/V1/coupon/logger/search" method="GET">
+        <service class="IWD\PaypalPos\Api\SalesCouponLoggerRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Magento_Sales::create" />
+        </resources>
+    </route>
+    <route url="/V1/logo" method="GET">
+        <service class="IWD\PaypalPos\Model\Theme\Logo" method="getLogoSrc"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/backup/date" method="GET">
+        <service class="IWD\PaypalPos\Api\BackupManagementInterface" method="getLastDate"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+</routes>
+

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job name="pos_db_backup_request" instance="IWD\PaypalPos\Cron\Backup" method="execute">
+            <schedule>* * * * *</schedule>
+        </job>
+        <job name="pos_db_backup" instance="IWD\PaypalPos\Cron\Backup" method="check">
+            <schedule>0 3 * * *</schedule>
+        </job>
+        <job instance="IWD\PaypalPos\Cron\OrderInfo" method="execute" name="pos_order_info">
+            <schedule>0 4 * * *</schedule>
+        </job>
+    </group>
+</config>

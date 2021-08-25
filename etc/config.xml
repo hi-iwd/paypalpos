@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <carriers>
+            <paypalposshipping>
+                <active>1</active>
+                <title>PayPal POS Shipping</title>
+                <name>PayPal POS Shipping</name>
+                <shipping_cost>0</shipping_cost>
+                <sallowspecific>0</sallowspecific>
+                <sort_order>15</sort_order>
+                <model>IWD\PaypalPos\Model\Carrier\PaypalPos</model>
+            </paypalposshipping>
+        </carriers>
+        <payment>
+            <paypalpos>
+                <active>1</active>
+                <model>IWD\PaypalPos\Model\Payment\PaypalPos</model>
+                <order_status>pending</order_status>
+                <title>Paypal Pos</title>
+                <allowspecific>0</allowspecific>
+                <group>offline</group>
+                <can_use_checkout>1</can_use_checkout>
+                <can_use_internal>1</can_use_internal>
+            </paypalpos>
+            <venmoqr>
+                <active>1</active>
+                <model>IWD\PaypalPos\Model\Payment\VenmoQR</model>
+                <order_status>pending</order_status>
+                <title>Venmo QR</title>
+                <allowspecific>0</allowspecific>
+                <group>offline</group>
+                <can_use_checkout>1</can_use_checkout>
+                <can_use_internal>1</can_use_internal>
+            </venmoqr>
+        </payment>
+    </default>
+</config>

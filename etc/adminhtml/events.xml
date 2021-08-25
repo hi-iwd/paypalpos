@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="catalog_product_delete_after">
+        <observer name="paypal_pos_remove_product" instance="IWD\PaypalPos\Observer\Product\Remove" />
+    </event>
+    <event name="customer_delete_after">
+        <observer name="paypal_pos_remove_customer" instance="IWD\PaypalPos\Observer\Customer\Remove"/>
+    </event>
+    <event name="catalog_category_delete_after">
+        <observer name="paypal_pos_remove_category" instance="IWD\PaypalPos\Observer\Category\Remove" />
+    </event>
+    <event name="salesrule_coupon_delete_after">
+        <observer name="paypal_pos_remove_category" instance="IWD\PaypalPos\Observer\Coupon\Remove" />
+    </event>
+</config>

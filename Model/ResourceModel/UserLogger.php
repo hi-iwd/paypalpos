@@ -1,0 +1,16 @@
+<?php
+
+namespace IWD\PaypalPos\Model\ResourceModel;
+
+use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
+
+/**
+ * @SuppressWarnings(PHPMD.CamelCaseMethodName)
+ */
+class UserLogger extends AbstractDb
+{
+    protected function _construct()
+    {
+        $this->_init('paypal_pos_user', 'entity_id');
+    }
+}

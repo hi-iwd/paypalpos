@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="admin_user">
+        <column xsi:type="varchar" name="paypal_password" nullable="true" length="255" comment="Paypal POS Password"/>
+    </table>
+    <table name="salesrule" resource="default" engine="innodb" comment="Salesrule">
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Update Time"/>
+        <index referenceId="SALESRULE_UPDATED_AT" indexType="btree">
+            <column name="updated_at"/>
+        </index>
+    </table>
+    <table name="paypal_pos_product" resource="default" engine="innodb" comment="PayPal Pos Removed Product Table">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity Id"/>
+        <column xsi:type="int" name="product_id" padding="10" unsigned="true" nullable="false" comment="Product Id"/>
+        <column xsi:type="timestamp" name="created_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Time"/>
+        <constraint referenceId="PRIMARY" xsi:type="primary">
+            <column name="entity_id"/>
+        </constraint>
+        <index referenceId="PAYPAL_POS_PRODUCT_ID" indexType="btree">
+            <column name="product_id"/>
+        </index>
+    </table>
+    <table name="paypal_pos_coupon_delete" resource="default" engine="innodb" comment="PayPal Pos Removed Product Table">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity Id"/>
+        <column xsi:type="int" name="coupon_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Coupon Id"/>
+        <column xsi:type="int" name="rule_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Rule ID"/>
+        <column xsi:type="timestamp" name="created_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Time"/>
+        <constraint referenceId="PRIMARY" xsi:type="primary">
+            <column name="entity_id"/>
+        </constraint>
+        <index referenceId="PAYPAL_POS_COUPON_DELETE_ID" indexType="btree">
+            <column name="coupon_id"/>
+        </index>
+        <index referenceId="PAYPAL_POS_COUPON_DELETE_CREATED_AT" indexType="btree">
+            <column name="coupon_id"/>
+        </index>
+    </table>
+    <table name="paypal_pos_customer" resource="default" engine="innodb" comment="PayPal Pos Removed Product Table">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity Id"/>
+        <column xsi:type="varchar" name="email" nullable="true" length="255" comment="Email"/>
+        <column xsi:type="int" name="customer_id" padding="10" unsigned="true" nullable="false" comment="Customer Id"/>
+        <column xsi:type="smallint" name="website_id" padding="5" unsigned="true" nullable="true" identity="false"
+                comment="Website ID"/>
+        <column xsi:type="timestamp" name="created_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Time"/>
+        <constraint referenceId="PRIMARY" xsi:type="primary">
+            <column name="entity_id"/>
+        </constraint>
+        <index referenceId="PAYPAL_POS_CUSTOMER_ID" indexType="btree">
+            <column name="email"/>
+        </index>
+    </table>
+    <table name="paypal_pos_category" resource="default" engine="innodb" comment="Logged category">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Entity Id"/>
+        <column xsi:type="int" name="category_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="catalog id"/>
+        <column xsi:type="smallint" name="store_id" padding="5" unsigned="true" nullable="false" identity="false"
+                comment="Store id"/>
+        <column xsi:type="timestamp" name="created_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="PAYPAL_POS_CATEGORY_STORE_ID_CATEGORY_ID">
+            <column name="store_id"/>
+            <column name="category_id"/>
+        </constraint>
+        <index referenceId="PAYPAL_POS_CREATED_AT" indexType="btree">
+            <column name="created_at"/>
+        </index>
+    </table>
+    <table name="paypal_pos_user" resource="default" engine="innodb" comment="PayPal Pos Removed Product Table">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity Id"/>
+        <column xsi:type="int" name="user_id" padding="10" unsigned="true" nullable="false"/>
+        <column xsi:type="varchar" name="email" nullable="true" length="128" comment="User Email"/>
+        <column xsi:type="varchar" name="username" nullable="true" length="40" comment="User Login"/>
+        <column xsi:type="timestamp" name="created_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="User Delete Time"/>
+        <constraint referenceId="PRIMARY" xsi:type="primary">
+            <column name="entity_id"/>
+        </constraint>
+        <index referenceId="PAYPAL_POS_CUSTOMER_ID" indexType="btree">
+            <column name="user_id"/>
+        </index>
+        <index referenceId="PAYPAL_POS_USER_EMAIL" indexType="btree">
+            <column name="email"/>
+        </index>
+        <index referenceId="PAYPAL_POS_CREATED_AT" indexType="btree">
+            <column name="created_at"/>
+        </index>
+    </table>
+    <table name="paypal_pos_cart_rule" resource="default" engine="innodb" comment="PayPal Pos Cart Price Rule">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity Id"/>
+        <column xsi:type="int" name="rule_id" padding="10" unsigned="true" nullable="false"/>
+        <column xsi:type="smallint" name="is_used" padding="5" unsigned="true" nullable="false" default="0"/>
+        <constraint referenceId="PRIMARY" xsi:type="primary">
+            <column name="entity_id"/>
+        </constraint>
+        <index referenceId="PAYPAL_POS_RULE_ID" indexType="btree">
+            <column name="rule_id"/>
+        </index>
+        <index referenceId="PAYPAL_POS_IS_USED" indexType="btree">
+            <column name="is_used"/>
+        </index>
+    </table>
+    <table name="paypal_pos_order_user" engine="innodb" comment="Order User">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity Id"/>
+        <column xsi:type="int" name="user_id" padding="10" unsigned="true" nullable="false" comment="User Id"/>
+        <column xsi:type="int" name="order_id" padding="10" unsigned="true" nullable="false" comment="Ordert Id"/>
+        <constraint referenceId="PRIMARY" xsi:type="primary">
+            <column name="entity_id"/>
+        </constraint>
+        <index referenceId="PAYPAL_POS_ORDER_USER" indexType="btree">
+            <column name="order_id"/>
+        </index>
+    </table>
+    <table name="paypal_pos_order_info" engine="innodb" comment="Order Info">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity Id"/>
+        <column xsi:type="decimal" name="order_amount" scale="4" precision="20" unsigned="false" nullable="false" comment="Base Shipping Amount"/>
+        <column xsi:type="varchar" name="order_status" nullable="false" length="32" comment="Status"/>
+        <column xsi:type="timestamp" name="order_created_at" on_update="false" nullable="true" default="CURRENT_TIMESTAMP" comment="Order Created At"/>
+        <index referenceId="PAYPAL_POS_ORDER_INFO" indexType="btree">
+            <column name="entity_id"/>
+        </index>
+    </table>
+</schema>
